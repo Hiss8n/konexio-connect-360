@@ -1,32 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import type { AuthResponsePayload, AuthUser, LoginPayload, RegisterPayload } from '../types';
 
-export type AuthUser = {
-  id: number;
-  first_name: string;
-  second_name: string;
-  email: string;
-  has_organisation: boolean;
-};
 
-export type LoginPayload = {
-  email: string;
-  password: string;
-};
-
-export type RegisterPayload = {
-  first_name: string;
-  second_name: string;
-  email: string;
-  password: string;
-  has_organisation?: boolean;
-};
-
-export type AuthResponsePayload = {
-  access_token: string;
-  token_type: string;
-  user: AuthUser;
-};
 
 const API_BASE_URL = 'http://localhost:8000';
 

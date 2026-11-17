@@ -63,6 +63,14 @@ input {
   border-bottom: 1px solid var(--line);
 }
 
+.mobile-menu {
+  display: contents;
+}
+
+.mobile-menu-toggle {
+  display: none;
+}
+
 .brand-wrap {
   display: flex;
   align-items: center;
@@ -514,6 +522,10 @@ input {
   padding: 32px;
 }
 
+.auth-card:has(.registration-details) {
+  width: min(100%, 700px);
+}
+
 .auth-header {
   margin-bottom: 22px;
 }
@@ -536,7 +548,9 @@ input {
   color: var(--text);
 }
 
-.auth-form input {
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
   width: 100%;
   border: 1px solid rgba(58, 61, 130, 0.15);
   border-radius: 4px;
@@ -545,9 +559,38 @@ input {
   background: #fff;
 }
 
-.auth-form input:focus {
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
   outline: 2px solid rgba(52, 182, 228, 0.18);
   border-color: var(--sky-cyano);
+}
+
+.auth-form textarea {
+  resize: vertical;
+}
+
+.auth-form .checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  font-weight: 500;
+}
+
+.auth-form .checkbox-row input {
+  width: auto;
+  margin-top: 4px;
+}
+
+.registration-type-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.registration-type-label button {
+  margin-left: auto;
 }
 
 .auth-row {
@@ -748,12 +791,67 @@ input {
 @media (max-width: 900px) {
   .site-header {
     flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 20px;
+  }
+
+  .brand-logo {
+    width: min(160px, 48vw);
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: 18px 20px;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--pure-white);
+    cursor: pointer;
+  }
+
+  .mobile-menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--deep-indigo);
+  }
+
+  .mobile-menu {
+    display: none;
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 4px 0 8px;
+  }
+
+  .mobile-menu.is-open {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 
   .main-nav {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .main-nav a {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-actions {
+    width: 100%;
+  }
+
+  .nav-actions .btn {
+    flex: 1;
   }
 
   .page-content,

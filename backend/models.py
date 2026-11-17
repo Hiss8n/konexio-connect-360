@@ -103,6 +103,22 @@ class AlumniProfile(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 
+class LearnerProfile(Base):
+    __tablename__ = "learner_profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+    business_id = Column(String(32), unique=True, index=True, nullable=False)
+    first_name = Column(String(100), nullable=False)
+    last_name = Column(String(100), nullable=False)
+    email = Column(String(320), nullable=False, unique=True, index=True)
+    city = Column(String(120), nullable=True)
+    country = Column(String(120), nullable=False)
+    pathway_code = Column(String(8), index=True, nullable=False)
+    learning_goal = Column(Text, nullable=False)
+    status = Column(String(32), nullable=False, default="pending_review", server_default="pending_review")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
 class PartnerApplication(Base):
     __tablename__ = "partner_applications"
 
