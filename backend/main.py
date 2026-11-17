@@ -4,14 +4,16 @@ load_dotenv()
 
 import chromadb
 import cohere
-from pydantic import BaseModel
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from pydantic import BaseModel, EmailStr, Field, field_validator
+from fastapi import Depends, FastAPI, UploadFile, File, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
 from pypdf import PdfReader
 from apscheduler.schedulers.background import BackgroundScheduler
 import httpx
 from auth.routes import router as auth_router
-from database import Base, engine
+from database import Base, engine, get_db
+from models import ContactMessage
 
 
 COHERE=os.getenv("COHERE") 
@@ -77,6 +79,36 @@ app.add_middleware(
 
 class chatQuery(BaseModel):
     message:str
+
+
+class ContactFormRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    email: EmailStr
+    phone: str = Field(min_length=7, max_length=32)
+    topic: str = Field(min_length=2, max_length=120)
+    message: str = Field(min_length=1, max_length=1500)
+
+    @field_validator("name", "phone", "topic", "message")
+    @classmethod
+    def strip_contact_fields(cls, value: str) -> str:
+        cleaned = value.strip()
+        if not cleaned:
+            raise ValueError("This field cannot be empty")
+        return cleaned
+
+
+@app.post("/contact", status_code=status.HTTP_201_CREATED)
+def submit_contact_form(request: ContactFormRequest, db: Session = Depends(get_db)):
+    contact_message = ContactMessage(
+        name=request.name,
+        email=str(request.email).strip().lower(),
+        phone=request.phone,
+        topic=request.topic,
+        message=request.message,
+    )
+    db.add(contact_message)
+    db.commit()
+    return {"status": "received"}
 
 
 def ping_health_check():

@@ -62,3 +62,16 @@ class Post(Base):
 	
    
 
+class ContactMessage(Base):
+    __tablename__ = "contact_messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(120), nullable=False)
+    email = Column(String(320), nullable=False, index=True)
+    phone = Column(String(32), nullable=False)
+    topic = Column(String(120), nullable=False)
+    message = Column(Text, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+
