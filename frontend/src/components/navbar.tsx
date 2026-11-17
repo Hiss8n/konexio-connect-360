@@ -1,0 +1,46 @@
+type NavbarProps = {
+  onHome: () => void;
+  onLogin: () => void;
+  onSignup: () => void;
+};
+
+const navItems = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Programmes', href: '#programmes' },
+  { label: 'Impact', href: '#impact' },
+  { label: 'Alumni', href: '#alumni' },
+  { label: 'Team', href: '#team' },
+  { label: 'Reports', href: '#reports' },
+  { label: 'Newsletter', href: '#newsletter' },
+  { label: 'Contact', href: '#contact' }
+];
+
+const Navbar = ({ onHome, onLogin, onSignup }: NavbarProps) => {
+  return (
+    <header className="site-header">
+      <button type="button" className="brand-wrap brand-button" aria-label="Konexio home" onClick={onHome}>
+        <div className="brand-mark">K</div>
+        <div className="brand-copy">
+          <strong>Konexio</strong>
+          <span>Africa Digi Pass</span>
+        </div>
+      </button>
+
+      <nav className="main-nav" aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a key={item.label} href={item.href}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div className="nav-actions">
+        <button type="button" className="btn btn-light" onClick={onLogin}>Log in</button>
+        <button type="button" className="btn btn-primary" onClick={onSignup}>Sign up</button>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+cohere
+pydantic
+chromadb
+pypdf
+python-dotenv
+python-multipart
+APScheduler
+httpx
+sqlalchemy
+psycopg[binary]
+bcrypt
+PyJWT
+email-validator
+psycopg2-binary
