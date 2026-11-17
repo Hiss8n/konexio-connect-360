@@ -13,14 +13,14 @@ const navItems = [
   { label: 'Team', href: '#team' },
   { label: 'Reports', href: '#reports' },
   { label: 'Newsletter', href: '#newsletter' },
-  { label: 'Contact', href: '#contact' }
+  
 ];
 
 const Navbar = ({ onHome, onLogin, onSignup }: NavbarProps) => {
   return (
     <header className="site-header">
       <button type="button" className="brand-wrap brand-button" aria-label="Konexio home" onClick={onHome}>
-        <img src="/src/assets/logo.png" alt="Konexio logo" className="brand-logo" />
+        <img src="/frontend/src/assets/konexio_africa_placeholder_logo.png" alt="Konexio logo" className="brand-logo" />
       </button>
 
       <nav className="main-nav" aria-label="Main navigation">
