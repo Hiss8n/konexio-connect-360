@@ -1,6 +1,7 @@
 import os
+import io
 from dotenv import load_dotenv
-load_dotenv()
+
 
 import chromadb
 import cohere
@@ -12,9 +13,11 @@ from pypdf import PdfReader
 from apscheduler.schedulers.background import BackgroundScheduler
 import httpx
 from auth.routes import router as auth_router
+from alumni_routes import router as alumni_router
+from partner_routes import router as partner_router
 from database import Base, engine, get_db
 from models import ContactMessage
-
+load_dotenv()
 
 COHERE=os.getenv("COHERE") 
 
@@ -35,14 +38,15 @@ CHROMA_SERVER_HOST = os.getenv("CHROMA_SERVER_HOST", "api.trychroma.com")
 CHROMA_SERVER_PORT = int(os.getenv("CHROMA_SERVER_PORT", "443"))
 CHROMA_TENANT = os.getenv("CHROMA_TENANT", "")
 CHROMA_DATABASE = os.getenv("CHROMA_DATABASE", "")
-CHROMA_AUTH_TOKEN = os.getenv("CHROMA_AUTH_TOKEN", "") 
+CHROMA_API_KEY = os.getenv("CHROMA_API_KEY", "") 
 
 
 #Connecting to a remote/cloud Chroma instance using HttpClient or Auth tokens
 chroma_client = chromadb.CloudClient(  
+    api_key=CHROMA_API_KEY,
     tenant=CHROMA_TENANT,
     database=CHROMA_DATABASE,
-    api_key=CHROMA_AUTH_TOKEN,
+    
     
 )
 print(f"anyways: {chroma_client.heartbeat()}")
@@ -54,6 +58,8 @@ collection =chroma_client.get_or_create_collection(
 
 app=FastAPI()
 app.include_router(auth_router)
+app.include_router(alumni_router)
+app.include_router(partner_router)
 
 
 
@@ -111,9 +117,9 @@ def submit_contact_form(request: ContactFormRequest, db: Session = Depends(get_d
     return {"status": "received"}
 
 
-def ping_health_check():
+""" def ping_health_check():
     # Replace with your actual deployed URL or localhost URL
-    url = "https://julia-pycq.onrender.com" 
+    url = "https://localhost:8000" 
     try:
         response = httpx.get(url)
         print(f"Health check pinged,**UP RUNNING**: {response.status_code}")
@@ -124,8 +130,8 @@ def ping_health_check():
 scheduler = BackgroundScheduler()
 # Run every 14 minutes
 scheduler.add_job(ping_health_check, 'interval', minutes=14)
-scheduler.start()
-
+scheduler.start() 
+ """
 
 @app.get("/")
 async def health():
@@ -227,18 +233,18 @@ def chat(req:chatQuery):
             {
                 "role":"system",
                 "content":"""You are a precise, direct, assistant. 
-                CRITICAL CONSTRAINTS:
-                1. Lead with the direct answer in the very first sentence. 
-                2. Be concise. Provide only the essential reasoning or evidence required to support the answer. Do not add filler text or introductory phrases like "Here is your answer."
-                3. Do not hedge, generalize, or say "it depends" unless you explicitly define the exact variables it depends on.
-                4. If you do not know the answer or lack sufficient context, state "I do not have information about that." plainly. Do not hallucinate or guess.
-                5.Do not respond to valgur or sexual language.Only use polite and respond with nice words and intentions.
-                FORMATTING RULES
-                - **No Asterisks:** Never use the asterisk symbol (`*`) anywhere in your responses, including for bolding, italics, or bullet points.
-                - **Bolding:** When bolding text use Markdown to make the text bold.
-                - **Lists & Bullets:** For bulleted lists, use dashes (`-`), en dashes (`–`), or unicode symbols (like `•`) at the start of lines,
-                  ensuring no asterisks are involved. For numbered lists, use standard numbers with periods (e.g., `1.`, `2.`).
-                - Make the text bold if emphasis is needed.
+                You are an AI assistant dedicated to answering questions about Konexio Africa, a social enterprise empowering underserved communities, youth, and refugees with digital skills, training programs, and impact outsourcing solutions.
+
+                Guardrails and Rules:
+
+                Always provide accurate, concise, and direct information based on verified facts regarding Konexio Africa operations, programs, and mission.
+
+                If you do not know the answer or lack sufficient context, state "I do not have information about that." plainly. Do not guess or hallucinate.
+
+                Maintain a polite and respectful tone in all interactions.
+
+                Do not respond to vulgar, inappropriate, or sexual language. Instead, remain courteous and respond with polite and positive intentions.
+                If you are not sure about a question,politely tell them that you have no information about that for now and ask them to contact konexioafrica@gmail.org for more info.
                 """
 
             },

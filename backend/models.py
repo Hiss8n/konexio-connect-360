@@ -74,4 +74,73 @@ class ContactMessage(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 
+class AlumniProfile(Base):
+    __tablename__ = "alumni_profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+    business_id = Column(String(32), unique=True, index=True, nullable=False)
+    first_name = Column(String(100), nullable=False)
+    last_name = Column(String(100), nullable=False)
+    city = Column(String(120), nullable=True)
+    country = Column(String(120), nullable=True)
+    pathway_code = Column(String(8), index=True, nullable=False)
+    short_bio = Column(Text, nullable=True)
+    skills = Column(JSON, nullable=True)
+    languages = Column(JSON, nullable=True)
+    availability = Column(String(100), nullable=True)
+    portfolio_title = Column(String(200), nullable=True)
+    portfolio_url = Column(String(500), nullable=True)
+    portfolio_image = Column(String(500), nullable=True)
+    personal_website = Column(String(500), nullable=True)
+    linkedin_url = Column(String(500), nullable=True)
+    photo_file = Column(String(500), nullable=True)
+    video_file = Column(String(500), nullable=True)
+    private_notification_email = Column(String(320), nullable=False, index=True)
+    consent_to_publish = Column(Boolean, nullable=False, default=False, server_default=text("false"))
+    consent_to_show_photo = Column(Boolean, nullable=False, default=False, server_default=text("false"))
+    consent_date = Column(DateTime(timezone=True), nullable=True)
+    is_active = Column(Boolean, nullable=False, default=False, server_default=text("false"))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+class PartnerApplication(Base):
+    __tablename__ = "partner_applications"
+
+    id = Column(Integer, primary_key=True, index=True)
+    business_id = Column(String(32), unique=True, index=True, nullable=False)
+    organisation = Column(String(160), nullable=False)
+    type = Column(String(32), nullable=False)
+    country = Column(String(120), nullable=True)
+    description = Column(Text, nullable=True)
+    logo_file = Column(String(500), nullable=True)
+    website = Column(String(500), nullable=True)
+    private_contact_name = Column(String(160), nullable=False)
+    private_contact_email = Column(String(320), nullable=False, index=True)
+    private_contact_phone = Column(String(32), nullable=True)
+    show_on_site = Column(Boolean, nullable=False, default=False, server_default=text("false"))
+    status = Column(String(32), nullable=False, default="pending_review", server_default="pending_review")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+class TeamMember(Base):
+    __tablename__ = "team_members"
+
+    team_id = Column(String(32), primary_key=True)
+    first_name = Column(String(100), nullable=False)
+    last_name = Column(String(100), nullable=False)
+    job_title = Column(String(160), nullable=False)
+    short_bio = Column(Text, nullable=True)
+    photo_file = Column(String(500), nullable=True)
+    role_mailbox = Column(String(320), nullable=True)
+    linkedin_url = Column(String(500), nullable=True)
+    display_email_publicly = Column(
+        Boolean,
+        nullable=False,
+        default=False,
+        server_default=text("false"),
+    )
+    contact_method = Column(String(120), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
 
