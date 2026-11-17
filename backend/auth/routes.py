@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 from auth.schemas import AuthResponse, LoginRequest, RegisterRequest, UserResponse
 from auth.security import create_access_token, get_token_user_id
-from auth.service import authenticate_user, get_user_by_email, register_user
+from auth.service import authenticate_user, get_user_by_email, register_learner_user, register_user
 from database import get_db
 from models import User
 
@@ -20,6 +20,19 @@ def register(request: RegisterRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An account with this email already exists")
     try:
         user = register_user(db, request)
+    except ValueError as error:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(error)) from error
+    return AuthResponse(access_token=create_access_token(user.id), user=user)
+
+
+@router.post("/learner/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
+def register_learner(request: RegisterRequest, db: Session = Depends(get_db)):
+    if request.account_type != "learner":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="This endpoint only accepts learner registrations")
+    if get_user_by_email(db, str(request.email)):
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An account with this email already exists")
+    try:
+        user = register_learner_user(db, request)
     except ValueError as error:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(error)) from error
     return AuthResponse(access_token=create_access_token(user.id), user=user)

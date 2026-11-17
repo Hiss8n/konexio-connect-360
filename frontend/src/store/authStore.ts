@@ -4,7 +4,7 @@ import type { AuthResponsePayload, AuthUser, LoginPayload, RegisterPayload } fro
 
 
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'http://127.0.0.1:8000';
 
 async function authRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -50,6 +50,7 @@ export const useAuthStore = create<AuthState>()(
 
       async login(payload) {
         set({ loading: true, error: null });
+        console.log('Login payload:', payload);
 
         try {
           const response = await authRequest<AuthResponsePayload>('/auth/login', {
@@ -59,7 +60,10 @@ export const useAuthStore = create<AuthState>()(
 
           set({
             token: response.access_token,
-            user: response.user,
+            user: {
+              ...response.user,
+              account_type: payload.account_type ?? response.user.account_type ?? 'learner',
+            },
             isAuthenticated: true,
             loading: false,
             error: null,
@@ -75,6 +79,7 @@ export const useAuthStore = create<AuthState>()(
 
       async register(payload) {
         set({ loading: true, error: null });
+        console.log('Register payload:', payload);
 
         try {
           const response = await authRequest<AuthResponsePayload>('/auth/register', {
@@ -84,7 +89,10 @@ export const useAuthStore = create<AuthState>()(
 
           set({
             token: response.access_token,
-            user: response.user,
+            user: {
+              ...response.user,
+              account_type: payload.account_type ?? response.user.account_type ?? 'learner',
+            },
             isAuthenticated: true,
             loading: false,
             error: null,

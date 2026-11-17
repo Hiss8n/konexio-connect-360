@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
 type LoginPageProps = {
@@ -12,23 +13,29 @@ const LoginPage = ({ onSwitchToSignup, onBackHome }: LoginPageProps) => {
   const error = useAuthStore((state) => state.error);
   const clearError = useAuthStore((state) => state.clearError);
 
-  const [form, setForm] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    account_type: 'learner' as 'learner' | 'alumni' | 'partner' | 'donor',
+  });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     clearError();
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
       await login({
         email: form.email,
         password: form.password,
+        account_type: form.account_type,
       });
-      onBackHome();
+      navigate(`/${form.account_type}`);
     } catch {
       // error is surfaced by the store and shown below
     }
@@ -65,6 +72,20 @@ const LoginPage = ({ onSwitchToSignup, onBackHome }: LoginPageProps) => {
               placeholder="Enter your password"
               required
             />
+          </label>
+
+          <label>
+            Role
+            <select
+              name="account_type"
+              value={form.account_type}
+              onChange={handleChange}
+            >
+              <option value="learner">Learner</option>
+              <option value="alumni">Alumni</option>
+              <option value="partner">Partner</option>
+              <option value="donor">Donor</option>
+            </select>
           </label>
 
           <div className="auth-row">

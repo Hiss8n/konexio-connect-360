@@ -14,6 +14,40 @@ def get_user_by_email(db: Session, email: str) -> User | None:
     return db.scalar(select(User).where(User.email == email))
 
 
+def register_learner_user(db: Session, payload: RegisterRequest | dict) -> User:
+    request = payload if isinstance(payload, RegisterRequest) else RegisterRequest(**payload)
+
+    if request.account_type != "learner":
+        raise ValueError("This helper only registers learner accounts")
+
+    user = User(
+        first_name=request.first_name,
+        second_name=request.second_name,
+        email=str(request.email),
+        password_hash=hash_password(request.password),
+        has_organisation=request.has_organisation,
+    )
+    db.add(user)
+    try:
+        db.add(LearnerProfile(
+            business_id=f"LRN-{uuid4().hex[:12].upper()}",
+            first_name=request.first_name,
+            last_name=request.second_name,
+            email=str(request.email),
+            city=request.city,
+            country=request.country,
+            pathway_code=request.pathway_code,
+            learning_goal=request.learning_goal,
+        ))
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise ValueError("An account with this email already exists") from None
+
+    db.refresh(user)
+    return user
+
+
 def register_user(db: Session, request: RegisterRequest) -> User:
     user = User(
         first_name=request.first_name,

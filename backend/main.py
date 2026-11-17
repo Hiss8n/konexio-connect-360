@@ -46,9 +46,8 @@ chroma_client = chromadb.CloudClient(
     api_key=CHROMA_API_KEY,
     tenant=CHROMA_TENANT,
     database=CHROMA_DATABASE,
-    
-    
-)
+    )
+
 print(f"anyways: {chroma_client.heartbeat()}")
  
 collection =chroma_client.get_or_create_collection(
@@ -117,10 +116,9 @@ def submit_contact_form(request: ContactFormRequest, db: Session = Depends(get_d
     db.commit()
     return {"status": "received"}
 
-
-""" def ping_health_check():
+def ping_health_check():
     # Replace with your actual deployed URL or localhost URL
-    url = "https://localhost:8000" 
+    url = "http://127.0.0.1:8000"
     try:
         response = httpx.get(url)
         print(f"Health check pinged,**UP RUNNING**: {response.status_code}")
@@ -132,7 +130,7 @@ scheduler = BackgroundScheduler()
 # Run every 14 minutes
 scheduler.add_job(ping_health_check, 'interval', minutes=14)
 scheduler.start() 
- """
+
 
 @app.get("/")
 async def health():

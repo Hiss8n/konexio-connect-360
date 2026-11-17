@@ -4,11 +4,13 @@ export type AuthUser = {
   second_name: string;
   email: string;
   has_organisation: boolean;
+  account_type?: 'learner' | 'alumni' | 'partner' | 'donor';
 };
 
 export type LoginPayload = {
   email: string;
   password: string;
+  account_type?: 'learner' | 'alumni' | 'partner' | 'donor';
 };
 
 export type RegisterPayload = {
