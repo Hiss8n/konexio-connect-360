@@ -64,36 +64,16 @@ input {
 .brand-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-width: 170px;
+  justify-content: center;
+  min-width: 0;
+  padding: 0;
 }
 
-.brand-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.brand-logo {
   width: 38px;
   height: 38px;
-  border-radius: 4px;
-  background: var(--deep-indigo);
-  color: var(--pure-white);
-  font-weight: 700;
-}
-
-.brand-copy {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
-.brand-copy strong {
-  font-size: 1.05rem;
-  color: var(--deep-indigo);
-}
-
-.brand-copy span {
-  font-size: 0.72rem;
-  color: var(--muted);
+  display: block;
+  object-fit: contain;
 }
 
 .main-nav {

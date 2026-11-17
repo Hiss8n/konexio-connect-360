@@ -20,11 +20,7 @@ const Navbar = ({ onHome, onLogin, onSignup }: NavbarProps) => {
   return (
     <header className="site-header">
       <button type="button" className="brand-wrap brand-button" aria-label="Konexio home" onClick={onHome}>
-        <div className="brand-mark">K</div>
-        <div className="brand-copy">
-          <strong>Konexio</strong>
-          <span>Africa Digi Pass</span>
-        </div>
+        <img src="/src/assets/logo.png" alt="Konexio logo" className="brand-logo" />
       </button>
 
       <nav className="main-nav" aria-label="Main navigation">
