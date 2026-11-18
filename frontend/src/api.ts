@@ -51,7 +51,7 @@ async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> 
 }
 
 export function fetchImpactSummary(): Promise<ImpactSummary> {
-  return apiFetch<ImpactSummary>('/api/impact/summary');
+  return apiFetch<ImpactSummary>('/api/impact/summary,');
 }
 
 export function fetchImpactLocations(): Promise<{
@@ -106,7 +106,10 @@ export function fetchAlumni(filters?: {
   if (filters?.skill) params.set('skill', filters.skill);
   if (filters?.q) params.set('q', filters.q);
   const qs = params.toString();
-  return apiFetch(`/api/alumni${qs ? `?${qs}` : ''}`);
+return apiFetch(`/api/alumni${qs ? `?${qs}` : ''}`,{
+  method: 'POST', // Explicitly setting it to POST
+  body: JSON.stringify({ name: 'New Hub', region: 'East Africa' }),
+});
 }
 
 export function fetchAlumnusDetail(businessId: string): Promise<{
@@ -121,7 +124,7 @@ export function fetchTeam(): Promise<{ team: PublicTeamMember[] }> {
 }
 
 export function fetchPartners(): Promise<{ partners: PublicPartner[] }> {
-  return apiFetch('/api/partners');
+  return apiFetch('/partners/register');
 }
 
 export function submitExpressInterest(
