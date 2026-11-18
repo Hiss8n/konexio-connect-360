@@ -151,14 +151,14 @@ export function registerPartnerApplication(payload: {
     body: JSON.stringify(payload),
   });
 }
-
+/* subscribe */
 export function subscribeNewsletter(payload: {
   email: string;
   list: 'alumni' | 'donor_partner';
   consent: boolean;
   website_url?: string;
 }): Promise<{ status: string; list: string; message: string }> {
-  return apiFetch('/api/newsletter/subscribe', {
+  return apiFetch('https://hook.eu1.make.com/y4w719q35zlni123cfnagg8e1dbfojgr', {
     method: 'POST',
     body: JSON.stringify(payload),
   });

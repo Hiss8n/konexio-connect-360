@@ -31,7 +31,6 @@ const ImpactsPage = ({ onNavigate }: ImpactsPageProps) => {
   const [reports, setReports] = useState<AnnualReport[]>([]);
   const [impactStories, setImpactStories] = useState<ImpactStory[]>([]);
   const [stories, setStories] = useState<PublicAlumnus[]>([]);
- 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
