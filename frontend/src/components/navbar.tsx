@@ -128,6 +128,15 @@ const Navbar = ({ currentPath, onNavigate }: NavbarProps) => {
               Apply Now
             </button>
           </div>
+          <div>          
+            <button
+            type="button"
+            className="brand-button"
+            aria-label="Konexio Africa home"
+            onClick={() => handleGo('/chat')}
+          >
+            <img src={konexioLogo} alt="Konexio Africa" className="brand-logo" />
+          </button></div>
 
           <button
             type="button"
