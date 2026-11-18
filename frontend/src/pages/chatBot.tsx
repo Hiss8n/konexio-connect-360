@@ -24,7 +24,7 @@ interface SendQueryPayload {
 export interface ChatBotPageProps {
   endpoint?: string;
   title?: string;
-  subtitle?: string;
+  
   placeholder?: string;
   initialGreeting?: string;
   headers?: Record<string, string>;
@@ -35,7 +35,7 @@ export interface ChatBotPageProps {
 export const ChatBotPage: React.FC<ChatBotPageProps> = ({
   endpoint = 'https://konexio-connect-360.onrender.com/query',
   title = 'AI Assistant',
-  subtitle = 'Connected to /query',
+  
   placeholder = 'Type your message...',
   initialGreeting = 'Hello! How can I help you today?',
   headers = {},
@@ -204,7 +204,7 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
           <div className="chatbot-avatar-sm">🤖</div>
           <div>
             <h1>{title}</h1>
-            <span>{subtitle}</span>
+      
           </div>
         </div>
 

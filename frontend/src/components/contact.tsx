@@ -72,12 +72,7 @@ const ContactSection = ({ initialTopic = '', onNavigate }: ContactProps) => {
     setRoutedRole(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const dataFome={
           name: trimmedName,
           email: trimmedEmail,
           phone: trimmedPhone || undefined,
@@ -86,10 +81,26 @@ const ContactSection = ({ initialTopic = '', onNavigate }: ContactProps) => {
           message: trimmedMessage,
           consent,
           website_url: websiteUrlHoneypot,
-        }),
+        }
+      const response = await fetch(`${API_BASE_URL}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataFome),
       });
+      const sendHook=await fetch('',{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(dataFome)
+            })
+      console.log("res",dataFome)
+
 
       const data = await response.json().catch(() => null);
+      console.log("datacontact",data)
 
       if (!response.ok) {
         const messageText =
