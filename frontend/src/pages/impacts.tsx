@@ -31,7 +31,7 @@ const ImpactsPage = ({ onNavigate }: ImpactsPageProps) => {
   const [reports, setReports] = useState<AnnualReport[]>([]);
   const [impactStories, setImpactStories] = useState<ImpactStory[]>([]);
   const [stories, setStories] = useState<PublicAlumnus[]>([]);
-  const [loading, setLoading] = useState(true);
+ 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -53,12 +53,12 @@ const ImpactsPage = ({ onNavigate }: ImpactsPageProps) => {
         setReports(repRes.reports);
         setImpactStories(repRes.stories ?? []);
         setStories(alumRes.alumni.slice(0, 3));
-        setLoading(false);
+      
       })
       .catch((err) => {
         if (!active) return;
         setError(err instanceof Error ? err.message : 'Unable to load impact metrics.');
-        setLoading(false);
+       
       });
     return () => {
       active = false;

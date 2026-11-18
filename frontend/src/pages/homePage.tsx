@@ -67,9 +67,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
   const [pathways, setPathways] = useState<PathwayInfo[]>([]);
   const [featuredAlumni, setFeaturedAlumni] = useState<PublicAlumnus[]>([]);
   const [partners, setPartners] = useState<PublicPartner[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
+ 
   // Page newsletter section
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterList, setNewsletterList] = useState<'alumni' | 'donor_partner'>('alumni');
@@ -97,12 +95,11 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
         setPathways(progData.pathways);
         setFeaturedAlumni(alumniData.alumni.slice(0, 4));
         setPartners(partnersData.partners);
-        setLoading(false);
+      
       })
       .catch((err) => {
         if (!active) return;
-        setError(err instanceof Error ? err.message : 'Unable to load platform overview.');
-        setLoading(false);
+       
       });
 
     return () => {
@@ -177,6 +174,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
                 <span>18 completed cohorts</span>
 
               </div>
+
               <div>
        
               </div>
@@ -195,11 +193,11 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
             </div>
           </div>
 
-          {error ? (
+          {/* {error ? (
             <div className="alert-box alert-error" style={{ marginTop: '24px' }}>
               {error}
             </div>
-          ) : null}
+          ) : null} */}
 
           {/* Dashboard-style Sample Impact Section */}
           <div style={{ marginTop: '36px' }}>
@@ -216,14 +214,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
               <span className="mono" style={{ fontSize: '0.78rem', color: 'var(--green-ink)', fontWeight: 600 }}>
                 Impact Overview · Data as of {summary?.as_of ?? '31 October 2026'}
               </span>
-              <button
-                type="button"
-                className="inline-link-btn"
-                style={{ fontSize: '0.84rem' }}
-                onClick={() => onNavigate('/impact')}
-              >
-                Open full impact dashboard <ArrowRight size={14} aria-hidden="true" />
-              </button>
+             
             </div>
   
     
@@ -267,9 +258,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
             </div>
              */}
           </div>
-   
-        </div>
-          <section className="section maps-section ">
+                 <section className="section maps-section ">
        
       <iframe 
     className="dashboard-iframe"
@@ -279,6 +268,9 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
   </iframe>
        
       </section>
+   
+        </div>
+   
     
       </section>
 
