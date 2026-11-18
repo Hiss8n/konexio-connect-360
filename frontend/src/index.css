@@ -95,6 +95,7 @@ textarea {
   right: 20px;
   z-index: 9999;
   font-family: inherit;
+  background-color: #1e293b;
 }
 
 .chatbot-launcher {
@@ -177,7 +178,7 @@ textarea {
 
 .chatbot-actions button {
   background: none;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #214b7f;
   border-radius: 6px;
   width: 28px;
   height: 28px;
@@ -273,7 +274,7 @@ textarea {
   font-family: inherit;
 }
 
-.chatbot-input-area textarea:focus {
+.chatbot-input-area:focus {
   border-color: #4f46e5;
 }
 
@@ -297,7 +298,8 @@ textarea {
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: #dbd0d0;
+  align-items: center;
   font-family: inherit;
   box-sizing: border-box;
 }
@@ -319,11 +321,28 @@ textarea {
 
 /* end */
 
-.chatbot-input-area button:disabled {
-  background: #cbd5e1;
-  cursor: not-allowed;
+.chatbot-input-area-button {
+  background: #b7cee9;
+  width: 40%;
+  border-radius: 2px;
+  border: none;
+ 
 }
+.input-box{
+  background: #eaf0f7;
+  width: 100%;
+  border-radius: 2px;
+  padding: 20px 12px;
+  border-radius: 5px;
+  border: none;
 
+}
+/* .chatbot-input-area-button{
+  width: 100%;
+  padding: 20px 3px;
+  border-radius: 3px;
+  background-color: red;
+} */
 .maps-section, 
 .dashboard-container {
   position: relative;        /* Keeps it strictly in normal document flow */
@@ -638,7 +657,7 @@ textarea {
 .main-content {
   flex: 1 0 auto;
 }
-
+/* 
 .section {
   padding: 72px 0;
 }

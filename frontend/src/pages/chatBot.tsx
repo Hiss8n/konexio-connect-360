@@ -66,7 +66,7 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const textareaRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     try {
@@ -170,7 +170,7 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -254,7 +254,7 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
 
       {/* Input */}
       <form onSubmit={handleSendMessage} className="chatbot-page-input-area">
-        <textarea
+        <input
           ref={textareaRef}
           rows={1}
           value={input}
@@ -262,8 +262,10 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           disabled={isLoading}
+          className='input-box'
         />
-        <button type="submit" disabled={!input.trim() || isLoading}>
+
+        <button type="submit" disabled={!input.trim() || isLoading} className='chatbot-input-area-button'>
           Send
         </button>
       </form>

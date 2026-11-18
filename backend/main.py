@@ -67,7 +67,8 @@ def create_database_tables():
 
 origins=[
     "http://localhost:5173",
-    "https://konexio-connect-360.vercel.app", 
+    "https://konexio-connect-360.vercel.app",
+    "https://hook.us2.make.com/5yg1flixiqx6xxbip21v5btnbsqifchj" 
     "http://localhost:8000",
     "http://localhost:8000/auth" 
                      

@@ -161,7 +161,12 @@ export function subscribeNewsletter(payload: {
   return apiFetch('https://hook.eu1.make.com/y4w719q35zlni123cfnagg8e1dbfojgr', {
     method: 'POST',
     body: JSON.stringify(payload),
-  });
+   
+    
+  },
+  
+);
+  
 }
 
 export function fetchDashboardData(token: string) {
