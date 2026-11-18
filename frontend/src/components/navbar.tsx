@@ -18,7 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Team', path: '/team' },
   { label: 'Get Involved', path: '/get-involved' },
   { label: 'Contact', path: '/contact' },
-  { label: 'Chatbot', path: '/chatbot' },
+
 ];
 
 type NavbarProps = {
