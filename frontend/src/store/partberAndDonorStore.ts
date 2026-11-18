@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 export type PartnerDonorKind = 'partner' | 'donor';
 export type PartnerType = 'Employer' | 'Client' | 'Training partner' | 'Donor';
 
