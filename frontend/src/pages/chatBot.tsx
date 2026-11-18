@@ -29,6 +29,7 @@ export interface ChatBotPageProps {
   initialGreeting?: string;
   headers?: Record<string, string>;
   storageKey?: string;
+  onNavigate?: (rawTarget: string) => void;
 }
 
 export const ChatBotPage: React.FC<ChatBotPageProps> = ({
