@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { LogOut, Menu, Shield, User, X } from 'lucide-react';
 import konexioLogo from '../assets/logo.png';
 import { useAuthStore } from '../store/authStore';
+import ChatBot from '../pages/chatBot';
 
 export type NavItem = {
   label: string;
@@ -17,6 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Team', path: '/team' },
   { label: 'Get Involved', path: '/get-involved' },
   { label: 'Contact', path: '/contact' },
+  { label: 'Chatbot', path: '/chatbot' },
 ];
 
 type NavbarProps = {
@@ -129,14 +131,15 @@ const Navbar = ({ currentPath, onNavigate }: NavbarProps) => {
             </button>
           </div>
           <div>          
-            <button
-            type="button"
-            className="brand-button"
-            aria-label="Konexio Africa home"
-            onClick={() => handleGo('/chat')}
-          >
-            <img src={konexioLogo} alt="Konexio Africa" className="brand-logo" />
-          </button></div>
+        <button
+          type="button"
+          className="brand-button"
+          aria-label="Assistant"
+          onClick={() => handleGo('/chat')}
+        >
+          <p>ASK KOCO 👩🏻</p>
+        </button>
+          </div>
 
           <button
             type="button"

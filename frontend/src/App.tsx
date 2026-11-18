@@ -14,6 +14,7 @@ import GetInvolvedPage from './pages/getInvolved';
 import DashboardPage from './pages/dashboard';
 import AdminPage from './pages/admin';
 import LegalPage from './pages/legal';
+import ChatBotPage from './pages/chatBot';
 
 type LocationState = {
   pathname: string;
@@ -129,12 +130,17 @@ function App() {
     if (pathname === '/admin') {
       return <AdminPage onNavigate={navigate} />;
     }
+    if (pathname === '/chat') {
+  return <ChatBotPage onNavigate={navigate} />;
+}
     if (pathname === '/privacy') {
       return <LegalPage mode="privacy" onNavigate={navigate} />;
     }
     if (pathname === '/terms') {
       return <LegalPage mode="terms" onNavigate={navigate} />;
     }
+   
+
 
     return <HomePage onNavigate={navigate} />;
   };
