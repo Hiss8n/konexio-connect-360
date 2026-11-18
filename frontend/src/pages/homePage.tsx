@@ -98,6 +98,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
       
       })
       .catch((err) => {
+        console.log(err)
         if (!active) return;
        
       });
