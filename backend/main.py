@@ -1,8 +1,6 @@
 import os
 import io
 from dotenv import load_dotenv
-
-
 import chromadb
 import cohere
 from pydantic import BaseModel, EmailStr, Field, field_validator

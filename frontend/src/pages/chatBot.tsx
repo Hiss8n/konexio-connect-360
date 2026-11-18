@@ -15,6 +15,12 @@ interface QueryResponse {
   message?: string;
 }
 
+interface SendQueryPayload {
+  message: string;
+  query: string;
+  history: ChatMessage[];
+}
+
 export interface ChatBotPageProps {
   endpoint?: string;
   title?: string;
@@ -26,7 +32,7 @@ export interface ChatBotPageProps {
 }
 
 export const ChatBotPage: React.FC<ChatBotPageProps> = ({
-  endpoint = '/query',
+  endpoint = 'https://konexio-connect-360.onrender.com/query',
   title = 'AI Assistant',
   subtitle = 'Connected to /query',
   placeholder = 'Type your message...',
@@ -34,8 +40,7 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
   headers = {},
   storageKey = 'chatbot_session_history',
 }) => {
-
-  const messagesContainerRef=useRef(null)
+  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     try {
       const saved = localStorage.getItem(storageKey);
@@ -74,10 +79,11 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  const sendQueryToBackend = async (
-    queryText: string,
-    history: ChatMessage[]
-  ): Promise<string> => {
+  const sendQueryToBackend = async ({
+    message,
+    query,
+    history,
+  }: SendQueryPayload): Promise<string> => {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -85,7 +91,8 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
         ...headers,
       },
       body: JSON.stringify({
-        query: queryText,
+        message,
+        query,
         history: history
           .filter((msg) => !msg.isError && msg.id !== 'welcome-msg')
           .map(({ role, content }) => ({ role, content })),
@@ -129,7 +136,12 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
     setIsLoading(true);
 
     try {
-      const botReply = await sendQueryToBackend(trimmed, updatedMessages);
+      const botReply = await sendQueryToBackend({
+        message: trimmed,
+        query: trimmed,
+        history: updatedMessages,
+      });
+
       setMessages((prev) => [
         ...prev,
         {
@@ -175,12 +187,13 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
     ]);
     localStorage.removeItem(storageKey);
   };
+
   useEffect(() => {
-  const el = messagesContainerRef.current;
-  if (el) {
-    el.scrollTop = el.scrollHeight;
-  }
-}, [messages, isLoading]);
+    const el = messagesContainerRef.current;
+    if (el) {
+      el.scrollTop = el.scrollHeight;
+    }
+  }, [messages, isLoading]);
 
   return (
     <div className="chatbot-page-wrapper">
@@ -194,18 +207,35 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
           </div>
         </div>
 
-        <button type="button" onClick={handleClearChat} className="chatbot-clear-btn">
+        <button
+          type="button"
+          onClick={handleClearChat}
+          className="chatbot-clear-btn"
+        >
           Clear Chat
         </button>
       </div>
 
       {/* Messages */}
-      <div className="chatbot-page-messages">
+      <div className="chatbot-page-messages" ref={messagesContainerRef}>
         {messages.map((msg) => {
           const isUser = msg.role === 'user';
           return (
-            <div key={msg.id} className={`chatbot-message-row ${isUser ? 'user-row' : 'bot-row'}`}>
-              <div className={`chatbot-bubble ${isUser ? 'user-bubble' : msg.isError ? 'error-bubble' : 'bot-bubble'}`}>
+            <div
+              key={msg.id}
+              className={`chatbot-message-row ${
+                isUser ? 'user-row' : 'bot-row'
+              }`}
+            >
+              <div
+                className={`chatbot-bubble ${
+                  isUser
+                    ? 'user-bubble'
+                    : msg.isError
+                    ? 'error-bubble'
+                    : 'bot-bubble'
+                }`}
+              >
                 {msg.content}
               </div>
               <span className="chatbot-time">{msg.timestamp}</span>
@@ -236,7 +266,6 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
           Send
         </button>
       </form>
-      <div ref={messagesContainerRef}/>
     </div>
   );
 };
