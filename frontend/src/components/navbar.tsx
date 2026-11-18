@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LogOut, Menu, Shield, User, X } from 'lucide-react';
-import konexioLogo from '../assets/logo.png';
+import logo from "../assets/konexio_africa_placeholder_logo.png";
 import { useAuthStore } from '../store/authStore';
 
 
@@ -60,7 +60,9 @@ const Navbar = ({ currentPath, onNavigate }: NavbarProps) => {
             aria-label="Konexio Africa home"
             onClick={() => handleGo('/')}
           >
-            <img src={konexioLogo} alt="Konexio Africa" className="brand-logo" />
+            <img  src={logo}
+  alt="Konexio Africa"
+  className="brand-logo"/>
           </button>
 
           <nav className="desktop-nav" aria-label="Main navigation">

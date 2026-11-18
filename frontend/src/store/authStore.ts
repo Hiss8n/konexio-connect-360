@@ -76,6 +76,7 @@ export const useAuthStore = create<AuthState>()(
         set({ loading: true, error: null });
 
         try {
+         
           const response = await authRequest<AuthResponsePayload>('/auth/register', {
             method: 'POST',
             body: JSON.stringify(payload),

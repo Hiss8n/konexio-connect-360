@@ -15,8 +15,9 @@ import {
   ShieldCheck,
   TrendingUp,
 } from 'lucide-react';
-import heroLearningPhoto from '../assets/images/hero_digital_learning_1794927725402.jpg';
-import mentorshipPhoto from '../assets/images/about_mentorship_1794927725109.jpg';
+import heroBackground from '../assets/hero_home_1.png';
+
+import visitors from '../assets/visitors.jpeg';
 import ImpactMap from '../components/ImpactMap';
 import {
   fetchAlumni,
@@ -135,7 +136,14 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-section dashboard-container">
+      <section className="hero-section dashboard-container"
+      style={{
+    backgroundImage: `url(${heroBackground})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }} 
+      >
         <div className="container">
           <div className="hero-grid">
             <div className="hero-copy-col">
@@ -181,17 +189,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
               </div>
             </div>
 
-            <div className="hero-media-frame">
-              <img
-                src={heroLearningPhoto}
-                alt="Young African professionals collaborating with laptops in a modern Konexio Africa training studio"
-                referrerPolicy="no-referrer"
-              />
-              <div className="hero-media-caption">
-                <strong>Training connected to remote employment</strong>
-                <span>Part I workplace readiness and Part II specialized digital careers</span>
-              </div>
-            </div>
+            
           </div>
 
           {/* {error ? (
@@ -283,7 +281,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
           <div className="split-editorial">
             <div className="photo-frame" style={{ aspectRatio: '4 / 3' }}>
               <img
-                src={mentorshipPhoto}
+                src={visitors}
                 alt="Konexio Africa mentor guiding a learner through a digital workflow"
                 referrerPolicy="no-referrer"
               />

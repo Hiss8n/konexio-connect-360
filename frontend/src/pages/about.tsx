@@ -8,8 +8,9 @@ import {
   ShieldCheck,
   Target,
 } from 'lucide-react';
-import mentorshipPhoto from '../assets/images/about_mentorship_1794927725109.jpg';
-import communityPhoto from '../assets/images/community_network_1794927726435.jpg';
+import sessions from '../assets/session.jpeg';
+import communityPhoto from '../assets/sessio2.jpeg';
+
 import {
   fetchImpactLocations,
   fetchImpactSummary,
@@ -81,7 +82,7 @@ const AboutPage = ({ onNavigate }: AboutPageProps) => {
 
             <div className="photo-frame" style={{ aspectRatio: '4 / 3' }}>
               <img
-                src={mentorshipPhoto}
+                src={sessions}
                 alt="A Konexio Africa mentor coaching a learner on a laptop in a modern training studio"
                 referrerPolicy="no-referrer"
               />

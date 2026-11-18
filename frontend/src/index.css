@@ -97,7 +97,10 @@ textarea {
   font-family: inherit;
   background-color: #1e293b;
 }
-
+.site-footer{
+  width: 100%;
+  height: 50%;
+}
 .chatbot-launcher {
   width: 55px;
   height: 55px;

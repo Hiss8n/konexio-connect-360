@@ -245,7 +245,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
 
 </div>
 
-<div className="dashboard-fallback">
+{/* <div className="dashboard-fallback">
   <a 
     className="dashboard-btn"
     href="https://lookerstudio.google.com/reporting/aa002d7b-99d3-41ab-a7fd-e2984ebd71a3" 
@@ -253,9 +253,9 @@ const Footer = ({ onNavigate }: FooterProps) => {
     rel="noopener noreferrer">
     View live dashboard
   </a>
-</div>
+</div> */}
    
-         
+     {/*     
           <div style={{ display: 'flex', gap: '18px' }}>
             <button
               type="button"
@@ -271,7 +271,7 @@ const Footer = ({ onNavigate }: FooterProps) => {
             >
               Terms of Use
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

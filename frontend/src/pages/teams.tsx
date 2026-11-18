@@ -3,6 +3,7 @@ import { ArrowRight, ExternalLink, Mail, ShieldCheck } from 'lucide-react';
 import { fetchTeam } from '../api';
 import type { PublicTeamMember } from '../types';
 
+
 type TeamsPageProps = {
   onNavigate: (path: string) => void;
 };
