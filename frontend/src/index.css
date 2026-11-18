@@ -38,6 +38,7 @@ body {
   margin: 0;
   overflow: none;
   box-sizing: border-box;
+
   font-family: var(--font-sans);
   background: var(--cream);
   color: var(--ink);
@@ -640,6 +641,10 @@ textarea {
 
 .section {
   padding: 72px 0;
+}
+
+.my-section{
+  height: 700px;
 }
 
 .section-tight {

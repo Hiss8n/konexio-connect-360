@@ -259,7 +259,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
             </div>
              */}
           </div>
-                 <section className="section maps-section ">
+                 <section className="my-section maps-section ">
        
       <iframe 
     className="dashboard-iframe"
