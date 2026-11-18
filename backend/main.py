@@ -26,6 +26,7 @@ co = cohere.ClientV2(
 client = cohere.ClientV2(
 api_key=COHERE
 ) 
+MAKE_WEBHOOK=os.getenv("MAKE_WEBHOOK") 
 
 CHROMA_TENANT=os.getenv("CHROMA_TENANT") 
 CHROMA_HOST=os.getenv("CHROMA_HOST") 
@@ -68,7 +69,7 @@ def create_database_tables():
 origins=[
     "http://localhost:5173",
     "https://konexio-connect-360.vercel.app",
-    "https://hook.us2.make.com/5yg1flixiqx6xxbip21v5btnbsqifchj" 
+    MAKE_WEBHOOK ,
     "http://localhost:8000",
     "http://localhost:8000/auth" 
                      
