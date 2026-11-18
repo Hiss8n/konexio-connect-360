@@ -279,7 +279,7 @@ textarea {
 }
 
 .chatbot-input-area button {
-  background: #4f46e5;
+  background: #f1f0f6;
   color: white;
   border: none;
   border-radius: 8px;
@@ -326,16 +326,24 @@ textarea {
   width: 40%;
   border-radius: 2px;
   border: none;
+  padding: 0px 12px;
  
 }
 .input-box{
   background: #eaf0f7;
   width: 100%;
   border-radius: 2px;
-  padding: 20px 12px;
+  padding: 10px 12px;
+  width: 400px;
   border-radius: 5px;
   border: none;
 
+}
+.send-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: 2px;
 }
 /* .chatbot-input-area-button{
   width: 100%;

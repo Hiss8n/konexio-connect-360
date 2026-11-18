@@ -254,9 +254,9 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
 
       {/* Input */}
       <form onSubmit={handleSendMessage} className="chatbot-page-input-area">
-        <input
+        <div className='send-box'>
+          <input
           ref={textareaRef}
-          rows={1}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -268,6 +268,8 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
         <button type="submit" disabled={!input.trim() || isLoading} className='chatbot-input-area-button'>
           Send
         </button>
+        </div>
+        
       </form>
     </div>
   );
