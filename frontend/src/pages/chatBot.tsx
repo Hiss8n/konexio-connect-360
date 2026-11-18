@@ -261,7 +261,7 @@ export const ChatBotPage: React.FC<ChatBotPageProps> = ({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          disabled={isLoading}
+  
           className='input-box'
         />
 
