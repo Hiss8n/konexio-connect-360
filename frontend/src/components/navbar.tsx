@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { LogOut, Menu, Shield, User, X } from 'lucide-react';
 import konexioLogo from '../assets/logo.png';
 import { useAuthStore } from '../store/authStore';
-import ChatBot from '../pages/chatBot';
+
 
 export type NavItem = {
   label: string;
