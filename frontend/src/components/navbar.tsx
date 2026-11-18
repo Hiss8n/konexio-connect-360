@@ -137,7 +137,7 @@ const Navbar = ({ currentPath, onNavigate }: NavbarProps) => {
           aria-label="Assistant"
           onClick={() => handleGo('/chat')}
         >
-          <p>ASK KOCO 👩🏻</p>
+          <p>Ask koCo360 👩🏻</p>
         </button>
           </div>
 
