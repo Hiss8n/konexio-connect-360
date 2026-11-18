@@ -241,6 +241,20 @@ const Footer = ({ onNavigate }: FooterProps) => {
 
         <div className="footer-bottom">
           <span>© 2026 Konexio Africa Digi Pass</span>
+          <div className="dashboard-wrapper">
+
+</div>
+
+<div className="dashboard-fallback">
+  <a 
+    className="dashboard-btn"
+    href="https://lookerstudio.google.com/reporting/aa002d7b-99d3-41ab-a7fd-e2984ebd71a3" 
+    target="_blank" 
+    rel="noopener noreferrer">
+    View live dashboard
+  </a>
+</div>
+   
          
           <div style={{ display: 'flex', gap: '18px' }}>
             <button

@@ -137,7 +137,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section dashboard-container">
         <div className="container">
           <div className="hero-grid">
             <div className="hero-copy-col">
@@ -175,6 +175,10 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
                 <span>11 Digi Pass pathways</span>
                 <span aria-hidden="true">·</span>
                 <span>18 completed cohorts</span>
+
+              </div>
+              <div>
+       
               </div>
             </div>
 
@@ -221,7 +225,9 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
                 Open full impact dashboard <ArrowRight size={14} aria-hidden="true" />
               </button>
             </div>
-
+  
+    
+{/* 
             <div
               className="kpi-strip kpi-strip-5"
               style={{ marginTop: 0 }}
@@ -259,9 +265,24 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
                 <span className="kpi-label">Women learners</span>
               </div>
             </div>
+             */}
           </div>
+   
         </div>
+          <section className="section maps-section ">
+       
+      <iframe 
+    className="dashboard-iframe"
+    src="https://lookerstudio.google.com/embed/reporting/aa002d7b-99d3-41ab-a7fd-e2984ebd71a3/page/salDG" 
+    
+    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+  </iframe>
+       
       </section>
+    
+      </section>
+
+  
 
       {/* 1. Introduction to Konexio Africa */}
       <section className="section section-surface-white">

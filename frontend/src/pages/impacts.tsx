@@ -160,7 +160,17 @@ const ImpactsPage = ({ onNavigate }: ImpactsPageProps) => {
 
           {error ? <div className="alert-box alert-error">{error}</div> : null}
 
-          <div className="kpi-strip">
+    <div className="dashboard-wrapper">
+ {/*  <iframe 
+    src="https://lookerstudio.google.com/embed/reporting/aa002d7b-99d3-41ab-a7fd-e2984ebd71a3/page/salDG" 
+    frameborder="0" 
+    style="border:0;" 
+    allowfullscreen 
+    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+  </iframe> */}
+</div>
+
+         {/*  <div className="kpi-strip">
             <div className="kpi-card">
               <span className="kpi-value">
                 {loading || !summary ? '—' : summary.learners_trained.toLocaleString()}
@@ -207,7 +217,8 @@ const ImpactsPage = ({ onNavigate }: ImpactsPageProps) => {
               </span>
               <span className="kpi-label">Employer partners</span>
             </div>
-          </div>
+          </div> */}
+
         </div>
       </section>
 
