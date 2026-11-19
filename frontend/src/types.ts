@@ -31,7 +31,7 @@ export type RegisterPayload = {
   email: string;
   password: string;
   has_organisation?: boolean;
-  account_type: 'learner' | 'alumni' | 'employer' | 'partner' | 'donor';
+  account_type: 'learner' | 'alumni' | 'partner' | 'donor';
   city?: string;
   country?: string;
   pathway_code?: string;

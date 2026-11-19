@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react';
 import { ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { API_BASE_URL } from '../api';
+import axios from 'axios';
 
 type ContactProps = {
   initialTopic?: string;
@@ -89,29 +90,50 @@ const ContactSection = ({ initialTopic = '', onNavigate }: ContactProps) => {
         },
         body: JSON.stringify(dataFome),
       });
-      const sendHook=await fetch('https://hook.us2.make.com/mdvx3g79osrsefcaxgz54sp59lnjz9bt',{
+      const url="https://hook.us2.make.com/mdvx3g79osrsefcaxgz54sp59lnjz9bt"
+      const data={
+        name: `${trimmedName}`,
+          email:`${trimmedEmail}`, 
+          phone: `${trimmedPhone || undefined}`,
+          visitor_category:`${ visitorCategory}`,
+          topic: `${trimmedTopic}`,
+          message: `${trimmedMessage}`,
+          consent:`${consent}`,
+          website_url: `${websiteUrlHoneypot}`,
+        
+      }
+      axios.post(url,JSON.stringify(data),{
+        withCredentials:false,
+        transformRequest:[
+          (data,headers)=>{
+            return data
+          }
+        ]
+      
+      })
+    /*   const sendHook=await fetch('https://hook.us2.make.com/mdvx3g79osrsefcaxgz54sp59lnjz9bt',{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
         },
         body:JSON.stringify(dataFome)
             })
-      console.log("res",dataFome)
+      console.log("res",dataFome) */
 
 
-      const data = await response.json().catch(() => null);
-      console.log("datacontact",data)
+/*       const data = await response.json().catch(() => null);
+      console.log("datacontact",data) */
 
-      if (!response.ok) {
+    /*   if (!response.ok) {
         const messageText =
-          typeof data?.detail === 'string'
+        /*   typeof data?.detail === 'string'
             ? data.detail
             : 'Unable to send your message right now. Please try again.';
-        throw new Error(messageText);
-      }
+        throw new Error(messageText); 
+      } */
 
       setStatus('success');
-      setRoutedRole(typeof data?.routed_to_role === 'string' ? data.routed_to_role : null);
+     /*  setRoutedRole(typeof data?.routed_to_role === 'string' ? data.routed_to_role : null); */
       setFeedback('Your message has been logged and routed to the appropriate Konexio Africa desk.');
       setName('');
       setEmail('');

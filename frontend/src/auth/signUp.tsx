@@ -2,8 +2,7 @@ import { type ChangeEvent, type FormEvent, useEffect, useState } from 'react';
 import { ArrowRight, UserPlus } from 'lucide-react';
 import { fetchProgrammes } from '../api';
 import { useAuthStore } from '../store/authStore';
-import type { PathwayInfo } from '../types';
-import {supabase} from "../utils"
+import type { PathwayInfo, RegisterPayload } from '../types';
 type SignUpPageProps = {
   onNavigate: (path: string) => void;
   initialSearch?: string;
@@ -115,67 +114,56 @@ const SignUpPage = ({ onNavigate, initialSearch = '' }: SignUpPageProps) => {
     if (!registrationType) return;
 
     try {
+      const accountType: RegisterPayload['account_type'] =
+        registrationType === 'employer' ? 'partner' : registrationType;
+      const registrationData: RegisterPayload = {
+        first_name: form.first_name.trim(),
+        second_name: form.second_name.trim(),
+        email: form.email.trim(),
+        password: form.password,
+        account_type: accountType,
+        has_organisation: accountType === 'partner' || accountType === 'donor',
+        ...(registrationType === 'learner' && {
+          city: form.city.trim(),
+          country: form.country.trim(),
+          pathway_code: form.pathway_code,
+          learning_goal: form.learning_goal.trim(),
+        }),
+        ...(registrationType === 'alumni' && {
+          city: form.city.trim(),
+          country: form.country.trim(),
+          pathway_code: form.pathway_code,
+          short_bio: form.short_bio.trim(),
+          skills: form.skills.split(',').map((skill) => skill.trim()).filter(Boolean),
+          languages: form.languages.split(',').map((language) => language.trim()).filter(Boolean),
+          availability: form.availability,
+          portfolio_title: form.portfolio_title.trim(),
+          portfolio_url: form.portfolio_url.trim(),
+          personal_website: form.personal_website.trim(),
+          linkedin_url: form.linkedin_url.trim(),
+          consent_to_publish: form.consent_to_publish,
+          consent_to_show_photo: form.consent_to_show_photo,
+        }),
+        ...((accountType === 'partner' || accountType === 'donor') && {
+          organisation: form.organisation.trim(),
+          country: form.country.trim(),
+          partner_type:
+            registrationType === 'employer'
+              ? 'Employer'
+              : registrationType === 'donor'
+                ? 'Donor'
+                : form.partner_type,
+          description: form.description.trim(),
+          website: form.website.trim(),
+          phone: form.phone.trim(),
+        }),
+      };
 
-      const registrationData = {
-  first_name: form.first_name.trim(),
-  second_name: form.second_name.trim(),
-  account_type: registrationType,
-
-  has_organisation:
-    registrationType === "employer" ||
-    registrationType === "partner" ||
-    registrationType === "donor",
-
-  ...(registrationType === "learner" && {
-    city: form.city.trim(),
-    country: form.country.trim(),
-    pathway_code: form.pathway_code,
-    learning_goal: form.learning_goal.trim(),
-  }),
-
-  ...(registrationType === "alumni" && {
-    city: form.city.trim(),
-    country: form.country.trim(),
-    pathway_code: form.pathway_code,
-    short_bio: form.short_bio.trim(),
-    skills: form.skills.split(",").map(s => s.trim()).filter(Boolean),
-    languages: form.languages.split(",").map(l => l.trim()).filter(Boolean),
-    availability: form.availability,
-    portfolio_title: form.portfolio_title.trim(),
-    portfolio_url: form.portfolio_url.trim(),
-    personal_website: form.personal_website.trim(),
-    linkedin_url: form.linkedin_url.trim(),
-    consent_to_publish: form.consent_to_publish,
-    consent_to_show_photo: form.consent_to_show_photo,
-  }),
-
-  ...(["employer", "partner", "donor"].includes(registrationType) && {
-    organisation: form.organisation.trim(),
-    country: form.country.trim(),
-    partner_type: registrationType,
-    description: form.description.trim(),
-    website: form.website.trim(),
-    phone: form.phone.trim(),
-  }),
-};
-     const { data, error } = await supabase.auth.signUp({
-  email: form.email.trim(),
-  password: form.password,
-
-  options: {
-    data: registrationData,
-  },
-});
-console.log(data)
-if (error) {
-  throw error;
-}
-
-console.log("Registered:", data.user);
-      onNavigate(data.user?.role === 'admin' ? '/admin' : '/dashboard');
+      await register(registrationData);
+      onNavigate('/dashboard');
     } catch {
       // Error surfaced via authStore
-    } return 
+    }
   };
 
   return (
