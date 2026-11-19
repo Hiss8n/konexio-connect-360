@@ -90,6 +90,8 @@ const ContactSection = ({ initialTopic = '', onNavigate }: ContactProps) => {
         },
         body: JSON.stringify(dataFome),
       });
+      const res=await response.json()
+      console.log(res)
       const url="https://hook.us2.make.com/mdvx3g79osrsefcaxgz54sp59lnjz9bt"
       const data={
         name: `${trimmedName}`,
@@ -105,7 +107,7 @@ const ContactSection = ({ initialTopic = '', onNavigate }: ContactProps) => {
       axios.post(url,JSON.stringify(data),{
         withCredentials:false,
         transformRequest:[
-          (data,headers)=>{
+          (data)=>{
             return data
           }
         ]
