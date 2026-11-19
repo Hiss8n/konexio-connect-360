@@ -136,9 +136,9 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-section dashboard-container"
+      <section className="hero-section"
       style={{
-    backgroundImage: `url(${heroBackground})`,
+    backgroundImage: `linear-gradient(90deg, rgba(14, 33, 49, 0.94) 0%, rgba(14, 33, 49, 0.78) 58%, rgba(14, 33, 49, 0.48) 100%), url(${heroBackground})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -189,16 +189,12 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
               </div>
             </div>
 
-            
           </div>
+        </div>
+      </section>
 
-          {/* {error ? (
-            <div className="alert-box alert-error" style={{ marginTop: '24px' }}>
-              {error}
-            </div>
-          ) : null} */}
-
-          {/* Dashboard-style Sample Impact Section */}
+      <section className="home-dashboard-section">
+        <div className="container">
           <div style={{ marginTop: '36px' }}>
             <div
               style={{
@@ -257,7 +253,7 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
             </div>
              */}
           </div>
-                 <section className="my-section maps-section ">
+                <section className="maps-section">
        
       <iframe 
     className="dashboard-iframe"
@@ -269,8 +265,6 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
       </section>
    
         </div>
-   
-    
       </section>
 
   

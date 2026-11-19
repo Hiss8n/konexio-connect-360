@@ -396,30 +396,13 @@ textarea {
   }
 }
 
-/*
-  display: flex;
-*/
-.maps-section, 
-.dashboard-container {
-  position: relative;        /* Keeps it strictly in normal document flow */
-  clear: both; 
-  height: 50%;              /* Clears any floating or absolute elements above it */
-  margin-top: 3rem;          /* Adds clear breathing room below the previous section */
-  z-index: 1;                /* Keeps it safely layered */
-}
-
-#chat bot end
-
-/* web wrapper */
 .maps-section {
-  position: relative;   /* Keeps it strictly in normal document flow */
+  position: relative;
   display: block;
   width: 100%;
-  clear: both;          /* Prevents floating elements above from overlapping */
-  margin-top: 2rem;     /* Pushes it down away from the top section */
-  margin-bottom: 2rem;  /* Keeps space from the section below */
-  z-index: 1;           /* Stays beneath sticky navbars (usually z-index: 100+) */
-  overflow: hidden;     /* Ensures the inner iframe never bleeds outside */
+  height: clamp(360px, 58vw, 680px);
+  margin: 24px 0 40px;
+  overflow: hidden;
 }
 
 
@@ -436,8 +419,8 @@ textarea {
   top: 0;
   left: 0;
   width: 100%;
-  height: 40%;
-  border: 0; /* Replaces frameborder="0" and style="border:0;" */
+  height: 100%;
+  border: 0;
 }
 
 .dashboard-fallback {
@@ -807,21 +790,47 @@ h4 {
 
 /* Home Hero */
 .hero-section {
-  padding: 56px 0 40px;
+  display: flex;
+  min-height: 500px;
+  align-items: center;
+  padding: 72px 0;
+  color: var(--white);
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 44px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
 }
 
 .hero-copy-col {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 780px;
   padding: 12px 0;
+}
+
+.hero-section .kicker {
+  color: var(--amber);
+}
+
+.hero-section .hero-title {
+  color: var(--white);
+}
+
+.hero-section .btn-primary {
+  background: var(--amber);
+  color: var(--navy-deep);
+}
+
+.hero-section .btn-primary:hover:not(:disabled) {
+  background: #e59337;
+}
+
+.hero-section .lead-copy,
+.hero-section .hero-meta-line {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .hero-actions {
@@ -838,7 +847,7 @@ h4 {
   gap: 10px;
   margin-top: 24px;
   font-size: 0.85rem;
-  color: var(--slate);
+  font-weight: 600;
   flex-wrap: wrap;
 }
 
