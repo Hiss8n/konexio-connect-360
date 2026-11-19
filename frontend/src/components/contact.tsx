@@ -92,7 +92,7 @@ const ContactSection = ({ initialTopic = '', onNavigate }: ContactProps) => {
       });
       const res=await response.json()
       console.log(res)
-      const url="https://hook.us2.make.com/mdvx3g79osrsefcaxgz54sp59lnjz9bt"
+      const url="https://hook.eu1.make.com/y4w719q35zlni123cfnagg8e1dbfojgr"
       const data={
         name: `${trimmedName}`,
           email:`${trimmedEmail}`, 

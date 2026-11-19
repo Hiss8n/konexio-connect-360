@@ -70,7 +70,7 @@ origins=[
     "http://localhost:5173",
     "https://konexio-connect-360.vercel.app",
     "https://konexio-connect-360.onrender.com",
-    "https://hook.us2.make.com/mdvx3g79osrsefcaxgz54sp59lnjz9bt",
+    "https://hook.eu1.make.com/y4w719q35zlni123cfnagg8e1dbfojgr",
     MAKE_WEBHOOK ,
     "http://localhost:8000",
     "http://localhost:8000/auth" 
