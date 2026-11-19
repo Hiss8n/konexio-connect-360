@@ -69,11 +69,10 @@ def create_database_tables():
 origins=[
     "http://localhost:5173",
     "https://konexio-connect-360.vercel.app",
-    "https://konexio-connect-360.onrender.com",
+    
     "https://hook.eu1.make.com/y4w719q35zlni123cfnagg8e1dbfojgr",
     MAKE_WEBHOOK ,
-    "http://localhost:8000",
-    "http://localhost:8000/auth" 
+    "https://konexio-connect-360.vercel.app" 
                      
     ]
 
@@ -121,7 +120,7 @@ def submit_contact_form(request: ContactFormRequest, db: Session = Depends(get_d
 
 def ping_health_check():
     # Replace with your actual deployed URL or localhost URL
-    url = "http://127.0.0.1:8000"
+    url = "https://konexio-connect-360.onrender.com",
     try:
         response = httpx.get(url)
         print(f"Health check pinged,**UP RUNNING**: {response.status_code}")
